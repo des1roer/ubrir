@@ -26,7 +26,8 @@ switch ($act) {
                     `ts` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     `stat` VARCHAR(255) NOT NULL,
                     `success` TINYINT(4) NOT NULL DEFAULT '0',
-                    `uuid` VARCHAR(127) NOT NULL,
+                    `uuid` VARCHAR(127) NOT NULL,                    
+                    `upd` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                     PRIMARY KEY (`id`),
                     UNIQUE INDEX `uuid` (`uuid`)
                     )

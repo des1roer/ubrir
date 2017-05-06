@@ -37,7 +37,7 @@ $(function () {
 
     function refreshBanner() {
         i++;
-        if (i > 10)
+        if (i > 1000)
             clearInterval(interval);
         console.log(i);
         var uuid = guid(), ts = moment().format('YYYY-MM-DD HH:mm:ss');
