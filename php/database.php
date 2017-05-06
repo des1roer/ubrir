@@ -78,6 +78,29 @@ class Database extends PDO
             return $stmt->fetchAll($fetchMode);
         }
     }
+    
+    public function selectRow($sql, $array = array(), $fetchMode = PDO::FETCH_OBJ, $class = '')
+    {
+         // Append select if it isn't appended.
+        if (strtolower(substr($sql, 0, 7)) !== 'select ') {
+            $sql = "SELECT " . $sql;
+        }
+        
+        $stmt = $this->prepare($sql);
+        foreach ($array as $key => $value) {
+            if (is_int($value)) {
+                $stmt->bindValue("$key", $value, PDO::PARAM_INT);
+            } else {
+                $stmt->bindValue("$key", $value);
+            }
+        }
+        $stmt->execute();
+        if ($fetchMode === PDO::FETCH_CLASS) {
+            return $stmt->fetch($fetchMode, $class);
+        } else {
+            return $stmt->fetch($fetchMode);
+        }
+    }
     /**
      * insert method
      * @param  string $table table name

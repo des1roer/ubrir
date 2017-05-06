@@ -2,6 +2,18 @@ $(function () {
     console.log('load')
 //    alert(moment().format('YYYY-MM-DD HH:mm:ss'));
 //    refreshBanner()
+    $.ajax({
+        url: "php/data.php",
+        data: {act: 'create'},
+        type: 'POST',
+        success: function (data) {
+            console.log(JSON.parse(data));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+    
     i = 0
     var interval = setInterval(function () {
         refreshBanner()
@@ -25,7 +37,7 @@ $(function () {
 
     function refreshBanner() {
         i++;
-        if (i > 1000)
+        if (i > 10)
             clearInterval(interval);
         console.log(i);
         var uuid = guid(), ts = moment().format('YYYY-MM-DD HH:mm:ss');
